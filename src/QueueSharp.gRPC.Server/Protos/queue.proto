@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option csharp_namespace = "QueueSharp.gRPC.Server";
+
+package queue_sharp;
+
+service Queue {
+  rpc Enqueue (EnqueueRequest) returns (EnqueueReply);
+  rpc Dequeue (DequeueRequest) returns (DequeueReply);
+}
+
+message EnqueueRequest {
+  string topic = 1;
+  string payload = 2;
+}
+
+message EnqueueReply {
+  bool success = 1;
+}
+
+message DequeueRequest {
+  string topic = 1;
+}
+
+message DequeueReply {
+  bool success = 1;
+  int64 id = 2;
+  string payload = 3;
+}
